@@ -1,13 +1,22 @@
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
 import Layout from './components/Layout/Layout';
-import MoviesList from './components/MoviesList/MoviesList';
+import SearchPage from './pages/SearchPage/SearchPage';
+import DetailPage from './pages/DetailPage/DetailPage';
+import FavoritesPage from './pages/FavoritesPage/FavoritesPage';
 
 function App() {
 
   return (
-    <Layout>
-      <MoviesList />
-    </Layout>
+    <BrowserRouter>
+      <Layout>
+        <Routes>
+          <Route path="/" element={<SearchPage />} />
+          <Route path="/detail" element={<DetailPage />} />
+          <Route path="/favorites" element={<FavoritesPage />} />
+        </Routes>
+      </Layout>
+    </BrowserRouter>
   );
 }
 

@@ -2,6 +2,7 @@ import { BsSun, BsFillMoonFill } from 'react-icons/bs';
 import "./Header.scss";
 import { useAppDispatch, useAppSelector } from '../../hooks/storeHook';
 import { toggleTheme } from '../../features/theme/themeSlice';
+import Nav from '../Nav/Nav';
 
 const Header = () => {
     const { darkTheme } = useAppSelector(state => state);
@@ -19,6 +20,7 @@ const Header = () => {
                             Movies
                         </span>
                     </a>
+                    <Nav />
                     <div className='flex items-center lg:order-2'>
                         {darkTheme ? <BsSun onClick={() => onToggle()} className='Header__icon' /> : <BsFillMoonFill onClick={() => onToggle()} className='Header__icon' />}
                     </div>
