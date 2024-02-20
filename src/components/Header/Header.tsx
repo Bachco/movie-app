@@ -1,7 +1,7 @@
 import { BsSun, BsFillMoonFill } from 'react-icons/bs';
 import "./Header.scss";
 import { useAppDispatch, useAppSelector } from '../../hooks/storeHook';
-import { toggleTheme } from '../../features/theme/themeSlice';
+import { toggleTheme } from '../../features/themeSlice/themeSlice';
 import Nav from '../Nav/Nav';
 
 const Header = () => {

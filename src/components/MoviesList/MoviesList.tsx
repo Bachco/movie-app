@@ -2,10 +2,10 @@ import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/storeHook';
 import Search from '../Search/Search';
 import MoviesListDetail from './MoviesListDetail';
-import { getMoviesByString } from '../../features/movies/moviesSlice';
+import { getMoviesByString } from '../../features/moviesSlice/moviesSlice';
 import { setSearchString } from '../../features/searchStringSlice/searchStringSlice';
 import Pagination from '../Pagination/Pagination';
-import { setPages } from '../../features/pages/pagesSlice';
+import { setPages } from '../../features/pagesSlice/pagesSlice';
 
 const MoviesList = () => {
     const { movies } = useAppSelector((state) => state);
@@ -47,7 +47,7 @@ const MoviesList = () => {
             {totalResults && <p className='text-center mb-2'>Total Results: {totalResults}</p>}
             {(totalPages > 1) &&<Pagination />}
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8 mb-10'>
-                {searchMovies && searchMovies.map(movie => <MoviesListDetail key={movie.imdbID} title={movie.Title} year={movie.Year} poster_path={movie.Poster} />)}
+                {searchMovies && searchMovies.map(movie => <MoviesListDetail key={movie.imdbID} id={movie.imdbID} title={movie.Title} year={movie.Year} poster_path={movie.Poster} type={movie.Type} />)}
             </div>
         </div>
     );
