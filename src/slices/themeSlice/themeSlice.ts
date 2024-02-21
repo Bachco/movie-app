@@ -3,7 +3,6 @@ import { createSlice } from "@reduxjs/toolkit";
 type ThemeState = boolean;
 
 const themeFromLocalStorage = !!localStorage.getItem("site-theme");
-
 const initialState: ThemeState = themeFromLocalStorage;
 
 export const themeSlice = createSlice({

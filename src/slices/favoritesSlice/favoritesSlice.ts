@@ -1,25 +1,16 @@
-import { PayloadAction, createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { count } from 'console';
-import { WritingItem } from '../../api/interfaces';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { FavoritesState, WritingItem } from '../../api/interfaces';
 
 
-
-interface FavoritesState {
-    count: number;
-    favoritesData: null | { favorites: WritingItem[] };
-}
 
 
 const favoritesFromLocalStorage: FavoritesState = localStorage.getItem("local-favorites") ? JSON.parse(localStorage.getItem("local-favorites")!) : {count: 0,favoritesData: null}
 
 localStorage.setItem("local-favorites" , JSON.stringify(favoritesFromLocalStorage));
 
-/** State */
 
 const initialState: FavoritesState = favoritesFromLocalStorage;
 
-
-/** Slice */
 
 const moviesSlice = createSlice({
     name: "favorites",

@@ -4,7 +4,7 @@ import { useAppSelector } from "../../hooks/storeHook";
 const Nav = () => {
   const { data } = useAppSelector((state) => state.movieDetail);
   return (
-    <ul className="flex gap-x-4">
+    <ul className="flex gap-x-8 justify-center">
       <li>
         <Link to="/">Movie search</Link>
       </li>

@@ -15,7 +15,8 @@ const MoviesList = () => {
 
     const searchMovies = movies.data?.Search;
     const totalResults = movies.data?.totalResults;
-    const errorMessage = movies.data ? movies.data.Error : movies.error;
+    const errorMessage = movies.error;
+    const errorMessageData = movies.data?.Error;
 
     const totalPages = Math.ceil(totalResults / 10);
 
@@ -45,6 +46,8 @@ const MoviesList = () => {
 
             {errorMessage && <p className='text-center'>{errorMessage}</p>}
             {totalResults && <p className='text-center mb-2'>Total Results: {totalResults}</p>}
+            {(!movies.data || errorMessageData === "Incorrect IMDb ID.") && <p className='text-center'>Type something</p>}
+            {(errorMessageData && errorMessageData !== "Incorrect IMDb ID.") && <p className='text-center'>{errorMessageData}</p>}
             {(totalPages > 1) &&<Pagination />}
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8 mb-10'>
                 {searchMovies && searchMovies.map(movie => <MoviesListDetail key={movie.imdbID} imdbID={movie.imdbID} Title={movie.Title} Year={movie.Year} Poster={movie.Poster} Type={movie.Type} />)}

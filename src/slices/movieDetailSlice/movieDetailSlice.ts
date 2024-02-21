@@ -1,11 +1,6 @@
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { getMoviesById } from "../../api/actions";
-
-export interface MovieDetailInterface {
-    loading: boolean;
-    error: null | any;
-    data: null | any[];
-}
+import { MovieDetailInterface } from "../../api/interfaces";
 
 const initialState: MovieDetailInterface = {
     loading: false,
@@ -22,6 +17,7 @@ export const movieDetailSlice = createSlice({
         builder
             .addCase(getMoviesById.pending, (state) => {
                 state.loading = true;
+                state.data = null;
             })
             .addCase(getMoviesById.fulfilled, (state, action) => {
                 state.loading = false;
@@ -30,6 +26,7 @@ export const movieDetailSlice = createSlice({
             .addCase(getMoviesById.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.payload;
+                state.data = null;
             });
     }
 });

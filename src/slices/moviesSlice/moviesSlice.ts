@@ -1,20 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { getMoviesByString } from '../../api/actions';
-
-
-/** Interface */
-
-export interface MoviesState {
-    loading: boolean;
-    error: null | string;
-    data: null | { Search: any[], totalResults: any, Error: any }
-}
-
-interface GetMoviesByStringParams {
-    [key: string]: string;
-}
-
-/** State */
+import { MoviesState } from '../../api/interfaces';
 
 const initialState: MoviesState = {
     loading: false,
@@ -22,13 +8,14 @@ const initialState: MoviesState = {
     data: null
 }
 
-
-/** Slice */
-
 const moviesSlice = createSlice({
     name: "movies",
     initialState,
-    reducers: {},
+    reducers: {
+        clearAll(state) {
+            state.data = null;
+        },
+    },
     extraReducers(builder) {
         builder.addCase(getMoviesByString.pending, (state) => {
             state.loading = true;
@@ -43,5 +30,7 @@ const moviesSlice = createSlice({
         });
     }
 })
+
+export const { clearAll } = moviesSlice.actions;
 
 export default moviesSlice.reducer;

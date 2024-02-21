@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-const initialState: string = "avengers";
+const initialState: string = "";
 
 export const searchStringSlice = createSlice({
     name: 'search',

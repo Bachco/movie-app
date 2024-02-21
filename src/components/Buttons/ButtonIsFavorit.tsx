@@ -2,12 +2,8 @@ import { FC } from "react";
 import { GoStar, GoStarFill } from "react-icons/go";
 import { useAppDispatch, useAppSelector } from "../../hooks/storeHook";
 import { addToFavorites, removeFromFavorites } from "../../slices/favoritesSlice/favoritesSlice";
-import { WritingItem } from "../../api/interfaces";
+import { ButtonIsFavoritProps } from "../../api/interfaces";
 
-// Definícia props ako objektu item
-interface ButtonIsFavoritProps {
-  item: WritingItem;
-}
 
 const ButtonIsFavorit: FC<ButtonIsFavoritProps> = ({ item }) => {
   const { Poster, Title, Year, imdbID, Type } = item; // Destructuring objektu item
@@ -18,13 +14,13 @@ const ButtonIsFavorit: FC<ButtonIsFavoritProps> = ({ item }) => {
   return (
     isFavorite ? (
       <button
-        className={isFavorite ? "is-favorite" : ""}
+        className="hover:text-blue-400 transition-colors duration-200"
         onClick={() => dispatch(removeFromFavorites(imdbID))}>
         <GoStarFill />
       </button>
     ) : (
       <button
-        className={!isFavorite ? "not-favorite" : ""}
+        className="hover:text-blue-400 transition-colors duration-200"
         onClick={() => dispatch(addToFavorites({ Title, imdbID, Poster, Type, Year }))}>
         <GoStar />
       </button>

@@ -1,9 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { PagesState } from "../../api/interfaces";
 
-interface PagesState {
-    actualPage?: number;
-    pages?: number;
-}
 
 const initialState: PagesState = {
     actualPage: 1,

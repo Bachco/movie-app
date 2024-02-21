@@ -1,7 +1,9 @@
-import { useAppSelector, useAppDispatch } from "../../hooks/storeHook";
+import { useAppSelector } from "../../hooks/storeHook";
 import { findValueByKey } from "../../api/functions";
-import ButtonIsFavorit from "../../components/ButtonIsFavorit/ButtonIsFavorit";
+import ButtonIsFavorit from "../../components/Buttons/ButtonIsFavorit";
 import { WritingItem } from "../../api/interfaces";
+import Loading from "../../components/Loading/Loading";
+import Title from "../../components/Title/Title";
 
 
 const DetailPage = () => {
@@ -17,39 +19,29 @@ const DetailPage = () => {
   }
  
   return (
-    <div>
+    <div className="max-w-screen-lg mx-auto">
       {
-        (!movieDetail.error && movieDetail.data && !findValueByKey(movieDetail.data, "Search")) && (<div>
-          <div>
-            {findValueByKey(movieDetail.data, "Poster") && <img src={findValueByKey(movieDetail.data, "Poster")} alt={findValueByKey(movieDetail.data, "Poster")} />}
+        (!movieDetail.loading) ? (!movieDetail.error && movieDetail.data && !findValueByKey(movieDetail.data, "Search")) && (<div className="container mx-auto flex flex-col xl:flex-row gap-x-12">
+          <div className="flex flex-col w-full xl:max-w-[480px] relative">
+            {(movie.Poster && movie.Poster !== "N/A") ? (
+              <img src={movie.Poster} alt={movie.Title} />
+            ) : (
+              <div className="flex w-full min-h-80 justify-center items-center bg-gray-800 text-white">
+                No image
+              </div>
+            )}           
+            <div className="absolute right-4 top-4 text-4xl"><ButtonIsFavorit item={movie} /></div>
           </div>
-          <div>
-            {findValueByKey(movieDetail.data, "Title") && <h1>{findValueByKey(movieDetail.data, "Title")}</h1>}
-            {findValueByKey(movieDetail.data, "Type") && <p>Type: {findValueByKey(movieDetail.data, "Type")}</p>}
-            {findValueByKey(movieDetail.data, "Year") && <p>Year: {findValueByKey(movieDetail.data, "Year")}</p>}
-            {findValueByKey(movieDetail.data, "Genre") && <p>Genre: {findValueByKey(movieDetail.data, "Genre")}</p>}
+          <div className="flex-1 flex flex-col justify-start text-lg">            
+            {findValueByKey(movieDetail.data, "Title") && <Title title={findValueByKey(movieDetail.data, "Title")} specialClass="text-[30px]"/>}
+            {findValueByKey(movieDetail.data, "Type") && <p><strong>Type: </strong>{findValueByKey(movieDetail.data, "Type")}</p>}
+            {findValueByKey(movieDetail.data, "Year") && <p><strong>Year: </strong> {findValueByKey(movieDetail.data, "Year")}</p>}
+            {findValueByKey(movieDetail.data, "Genre") && <p><strong>Genre: </strong> {findValueByKey(movieDetail.data, "Genre")}</p>}
+            {findValueByKey(movieDetail.data, "Search") && <p><strong>Bad data</strong></p>}
           </div>
-          <ButtonIsFavorit item={movie} />
-        </div>)
-      }
-
-      {
-        findValueByKey(movieDetail.data, "Search") && <p>Bad data</p>
-        /*
-      movieDetail.imdbID == "" ?
-        (<div>Movie detail don't exist</div>) :
-        (<div>
-          <div>
-            {movieDetail.Poster !== "" && <img src={movieDetail.Poster} alt={movieDetail.Title} />}
-          </div>
-          <div>
-            {movieDetail.Title !== "" && <h1>{movieDetail.Title}</h1>}
-            {movieDetail.Type !== "" && <p>{movieDetail.Type}</p>}
-            {movieDetail.Year !== "" && <p>{movieDetail.Year}</p>}
-            
-          </div>
-        </div>)
-        */}
+        </div>) : <Loading />
+      }      
+      {movieDetail.error && <p>{movieDetail.error}</p>}
     </div>
   )
 }

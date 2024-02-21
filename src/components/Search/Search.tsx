@@ -1,24 +1,27 @@
 import { FC, FormEvent, useState } from "react";
 import { useAppSelector, useAppDispatch } from "../../hooks/storeHook";
 import { setSearchString } from "../../slices/searchStringSlice/searchStringSlice";
-
-interface SearchBoxProps {
-    onSearch: (searchTerm: string) => void;
-}
+import { clearAll } from "../../slices/moviesSlice/moviesSlice";
+import { SearchBoxProps } from "../../api/interfaces";
 
 const Search: FC<SearchBoxProps> = ({ onSearch }) => {
     const dispatch = useAppDispatch();
     const searchString = useAppSelector((state) => state.searchString);
-    const [inputValue, setInputValue] = useState(searchString); // Uchovávame hodnotu vstupného poľa v lokálnom stave
+    const [inputValue, setInputValue] = useState(searchString);
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        dispatch(setSearchString(inputValue.trim().toLowerCase())); // Používame inputValue namiesto searchString
-        onSearch(inputValue.trim().toLowerCase());
+        if (inputValue.trim().toLowerCase() === "") {
+            dispatch(clearAll());
+        } else {
+            dispatch(setSearchString(inputValue.trim().toLowerCase()));
+            onSearch(inputValue.trim().toLowerCase());
+        }
     };
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setInputValue(e.target.value); // Aktualizujeme inputValue pri zmene vstupného poľa
+        const filteredValue = e.target.value.replace(/[^a-zA-Z0-9 ]/g, '');
+        setInputValue(filteredValue);
     };
 
     return (
@@ -30,7 +33,7 @@ const Search: FC<SearchBoxProps> = ({ onSearch }) => {
                     className="block p-4 focus:outline-none text-sm text-gray-900 bg-gray-50 border border-gray-300 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
                     placeholder="Search..."
                     value={inputValue}
-                    onChange={handleChange} // Používame handleChange funkciu pri zmene vstupného poľa
+                    onChange={handleChange}
                 />
                 <button type="submit" className="bg-blue-500 text-white px-4 py-2">
                     Search

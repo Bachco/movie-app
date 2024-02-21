@@ -1,10 +1,8 @@
-import { ReactNode } from "react";
 import Header from "../Header/Header";
 import { useAppSelector } from "../../hooks/storeHook";
+import { Props } from "../../api/interfaces";
 
-interface Props {
-    children?: ReactNode
-}
+
 
 const Layout = ({ children }: Props) => {
     const { darkTheme } = useAppSelector((state) => state)

@@ -29,7 +29,7 @@ const Pagination = () => {
     }, [pages]);
 
     return (
-        <div className='flex justify-center content-center gap-4 mb-4'>
+        <div className='flex justify-center content-center gap-4 mb-4 flex-wrap'>
             {
                 (pages !== undefined && actualPage !== undefined) && (<>
                     <button
