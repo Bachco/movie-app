@@ -1,9 +1,10 @@
 import { PayloadAction, createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { count } from 'console';
 
 
 /** Interface */
 
-export interface FavoriteItem {
+interface FavoriteItem {
     Title: string;
     imdbID: string;
     Year: string;
@@ -11,17 +12,19 @@ export interface FavoriteItem {
     Poster: string;
 }
 
-export interface FavoritesState {
+interface FavoritesState {
     count: number;
     favoritesData: null | { favorites: FavoriteItem[] };
 }
 
+
+const favoritesFromLocalStorage: FavoritesState = localStorage.getItem("local-favorites") ? JSON.parse(localStorage.getItem("local-favorites")!) : {count: 0,favoritesData: null}
+
+localStorage.setItem("local-favorites" , JSON.stringify(favoritesFromLocalStorage));
+
 /** State */
 
-const initialState: FavoritesState = {
-    count: 0,
-    favoritesData: null
-}
+const initialState: FavoritesState = favoritesFromLocalStorage;
 
 
 /** Slice */
@@ -41,16 +44,21 @@ const moviesSlice = createSlice({
             } else {
                 state.favoritesData.favorites.push(action.payload);
             }
+
+            localStorage.setItem("local-favorites", JSON.stringify(state));
         },
         removeFromFavorites(state, action: PayloadAction<string>) {
             state.count--;
             if (state.favoritesData) {
                 state.favoritesData.favorites = state.favoritesData.favorites.filter(item => item.imdbID !== action.payload);
             }
+
+            localStorage.setItem("local-favorites", JSON.stringify(state));
         },
         clearAllFavorites(state) {
             state.count = 0;
             state.favoritesData = null;
+            localStorage.setItem("local-favorites", JSON.stringify(state));
         },
         toggleFavorites(state, action: PayloadAction<FavoriteItem>) {
             const existingIndex = state.favoritesData?.favorites.findIndex(item => item.imdbID === action.payload.imdbID);
@@ -61,6 +69,7 @@ const moviesSlice = createSlice({
                 state.favoritesData?.favorites.push(action.payload);
                 state.count++;
             }
+            localStorage.setItem("local-favorites", JSON.stringify(state));
         }
     },
 });
