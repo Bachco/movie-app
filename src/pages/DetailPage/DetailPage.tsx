@@ -1,19 +1,42 @@
-import { addToFavorites, removeFromFavorites, toggleFavorites } from "../../features/favoritesSlice/favoritesSlice";
 import { useAppSelector, useAppDispatch } from "../../hooks/storeHook";
+import { findValueByKey } from "../../api/functions";
+import ButtonIsFavorit from "../../components/ButtonIsFavorit/ButtonIsFavorit";
+import { WritingItem } from "../../api/interfaces";
+
 
 const DetailPage = () => {
   const { movieDetail } = useAppSelector((state) => state);
-  const { favoritesData } = useAppSelector((state) => state.favorites);
-  const dispatch = useAppDispatch();
 
-  const isFavorite = favoritesData?.favorites.some((favorite) => favorite.imdbID === movieDetail.imdbID);
+  const movie: WritingItem = {
+    Title: findValueByKey(movieDetail.data, "Title"),
+    imdbID: findValueByKey(movieDetail.data, "imdbID"),
+    Year: findValueByKey(movieDetail.data, "Year"),
+    Type: findValueByKey(movieDetail.data, "Type"),
+    Poster: findValueByKey(movieDetail.data, "Poster"),
 
-  console.log(isFavorite);
-
-
+  }
+ 
   return (
     <div>
-      {movieDetail.imdbID == "" ?
+      {
+        (!movieDetail.error && movieDetail.data && !findValueByKey(movieDetail.data, "Search")) && (<div>
+          <div>
+            {findValueByKey(movieDetail.data, "Poster") && <img src={findValueByKey(movieDetail.data, "Poster")} alt={findValueByKey(movieDetail.data, "Poster")} />}
+          </div>
+          <div>
+            {findValueByKey(movieDetail.data, "Title") && <h1>{findValueByKey(movieDetail.data, "Title")}</h1>}
+            {findValueByKey(movieDetail.data, "Type") && <p>Type: {findValueByKey(movieDetail.data, "Type")}</p>}
+            {findValueByKey(movieDetail.data, "Year") && <p>Year: {findValueByKey(movieDetail.data, "Year")}</p>}
+            {findValueByKey(movieDetail.data, "Genre") && <p>Genre: {findValueByKey(movieDetail.data, "Genre")}</p>}
+          </div>
+          <ButtonIsFavorit item={movie} />
+        </div>)
+      }
+
+      {
+        findValueByKey(movieDetail.data, "Search") && <p>Bad data</p>
+        /*
+      movieDetail.imdbID == "" ?
         (<div>Movie detail don't exist</div>) :
         (<div>
           <div>
@@ -23,23 +46,10 @@ const DetailPage = () => {
             {movieDetail.Title !== "" && <h1>{movieDetail.Title}</h1>}
             {movieDetail.Type !== "" && <p>{movieDetail.Type}</p>}
             {movieDetail.Year !== "" && <p>{movieDetail.Year}</p>}
-            {isFavorite ? (
-              <button
-                className={isFavorite ? "is-favorite" : ""}
-                onClick={() => dispatch(removeFromFavorites(movieDetail.imdbID))}> 
-                remove
-              </button>
-              ) : (
-                <button
-                  className={isFavorite ? "is-favorite" : ""}
-                  onClick={() => dispatch(addToFavorites(movieDetail))}>
-                  add
-                </button>
-              )
-            }
+            
           </div>
         </div>)
-      }
+        */}
     </div>
   )
 }

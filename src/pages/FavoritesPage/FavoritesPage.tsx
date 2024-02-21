@@ -1,4 +1,4 @@
-import { removeFromFavorites } from "../../features/favoritesSlice/favoritesSlice";
+import { removeFromFavorites } from "../../slices/favoritesSlice/favoritesSlice";
 import { useAppSelector, useAppDispatch } from "../../hooks/storeHook";
 
 const FavoritesPage = () => {

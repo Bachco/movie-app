@@ -1,7 +1,7 @@
 import { BsSun, BsFillMoonFill } from 'react-icons/bs';
 import "./Header.scss";
 import { useAppDispatch, useAppSelector } from '../../hooks/storeHook';
-import { toggleTheme } from '../../features/themeSlice/themeSlice';
+import { toggleTheme } from '../../slices/themeSlice/themeSlice';
 import Nav from '../Nav/Nav';
 
 const Header = () => {
@@ -15,7 +15,7 @@ const Header = () => {
         <div className='Header mb-20'>
             <nav className='border-b border-gray-200 border-opacity-25 py-2.5'>
                 <div className='flex flex-wrap justify-between items-center mx-auto max-w-screen-xl'>
-                    <a href="#1">
+                    <a href="/">
                         <span className='self-center text-xl font-semibold whitespace-nowrap'>
                             Movies
                         </span>

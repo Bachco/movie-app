@@ -2,13 +2,13 @@ import { Link } from "react-router-dom";
 import { useAppSelector } from "../../hooks/storeHook";
 
 const Nav = () => {
-  const { imdbID } = useAppSelector((state) => state.movieDetail);
+  const { data } = useAppSelector((state) => state.movieDetail);
   return (
     <ul className="flex gap-x-4">
       <li>
         <Link to="/">Movie search</Link>
       </li>
-      {imdbID !== "" && (
+      {data && (
         <li>
           <Link to="/detail">Detail</Link>
         </li>

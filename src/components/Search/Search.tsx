@@ -1,6 +1,6 @@
 import { FC, FormEvent, useState } from "react";
 import { useAppSelector, useAppDispatch } from "../../hooks/storeHook";
-import { setSearchString } from "../../features/searchStringSlice/searchStringSlice";
+import { setSearchString } from "../../slices/searchStringSlice/searchStringSlice";
 
 interface SearchBoxProps {
     onSearch: (searchTerm: string) => void;

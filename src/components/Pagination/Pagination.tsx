@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from '../../hooks/storeHook';
-import { setPages } from '../../features/pagesSlice/pagesSlice';
+import { setPages } from '../../slices/pagesSlice/pagesSlice';
 import { useEffect } from 'react';
 
 const Pagination = () => {

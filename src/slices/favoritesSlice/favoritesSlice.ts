@@ -1,20 +1,12 @@
 import { PayloadAction, createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { count } from 'console';
+import { WritingItem } from '../../api/interfaces';
 
 
-/** Interface */
-
-interface FavoriteItem {
-    Title: string;
-    imdbID: string;
-    Year: string;
-    Type: string;
-    Poster: string;
-}
 
 interface FavoritesState {
     count: number;
-    favoritesData: null | { favorites: FavoriteItem[] };
+    favoritesData: null | { favorites: WritingItem[] };
 }
 
 
@@ -33,7 +25,7 @@ const moviesSlice = createSlice({
     name: "favorites",
     initialState,
     reducers: {
-        addToFavorites(state, action: PayloadAction<FavoriteItem>) {
+        addToFavorites(state, action: PayloadAction<WritingItem>) {
             const existingItem = state.favoritesData?.favorites.find(item => item.imdbID === action.payload.imdbID);
             if (existingItem || state.count >= 10) {
                 return;
@@ -60,7 +52,7 @@ const moviesSlice = createSlice({
             state.favoritesData = null;
             localStorage.setItem("local-favorites", JSON.stringify(state));
         },
-        toggleFavorites(state, action: PayloadAction<FavoriteItem>) {
+        toggleFavorites(state, action: PayloadAction<WritingItem>) {
             const existingIndex = state.favoritesData?.favorites.findIndex(item => item.imdbID === action.payload.imdbID);
             if (existingIndex !== undefined && existingIndex !== -1) {
                 state.favoritesData?.favorites.splice(existingIndex, 1);
