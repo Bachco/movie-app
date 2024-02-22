@@ -1,142 +1,68 @@
-<p align="center">
-  <a href="" rel="noopener">
- <img width=200px height=200px src="https://i.imgur.com/FxL5qM0.jpg" alt="Bot logo"></a>
-</p>
+# MovieApp
 
-<h3 align="center">movie-app</h3>
+## Brief Description
+<p>This application is designed for browsing movies from the OMDb API database. It includes three subsections:</p>
 
-<div align="center">
+- **Movie Search:** <p>Facilitates movie searches within the database. Features include an input field for search queries, pagination, a display of search results, and error messages if applicable.</p>
+- **Movie Detail:** <p>Displays detailed information about a selected movie (e.g., title, year, genre, poster). Next to the title, a "star" icon allows users to add or remove the movie from their favorites.</p>
+- **My Favorite Movies:** <p>Lists favorite movies with options to navigate to movie details or remove a movie from favorites.</p>
 
-[![Status](https://img.shields.io/badge/status-active-success.svg)]()
-[![Platform](https://img.shields.io/badge/platform-reddit-orange.svg)](https://www.reddit.com/user/Wordbook_Bot)
-[![GitHub Issues](https://img.shields.io/github/issues/kylelobo/The-Documentation-Compendium.svg)](https://github.com/kylelobo/The-Documentation-Compendium/issues)
-[![GitHub Pull Requests](https://img.shields.io/github/issues-pr/kylelobo/The-Documentation-Compendium.svg)](https://github.com/kylelobo/The-Documentation-Compendium/pulls)
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](/LICENSE)
+<p>The site is designed for clarity and simplicity, primarily serving as a demonstration of capabilities for a job application.</p>
 
-</div>
+## Technologies Used
+<ul>
+<li><strong>React:</strong> A library for building user interfaces</li>
+<li><strong>TypeScript:</strong> JavaScript with syntax for types</li>
+<li><strong>Redux:</strong> A library for managing application state</li>
+<li><strong>React Router:</strong> For page navigation</li>
+<li><strong>Tailwind CSS:</strong> A utility-first CSS framework</li>
+</ul>
 
----
+## Project Structure
+<p>Below is an overview of the project's structure:</p>
 
-<p align="center"> 🤖 Few lines describing what your bot does.
-    <br> 
-</p>
+- **/build:** <p>Production version of the application</p>
+- **/node_modules:** <p>External modules and libraries</p>
+- **/public:** <p>Contains static resources like images, favicon, etc.</p>
+- **/src:** <p>Source codes of the application, divided into folders:</p>
+  - **/api:** <p>Contains functions, actions, and interfaces for API communication</p>
+  - **/components:** <p>Reusable components</p>
+  - **/hooks:** <p>Exports hooks from `store.ts` (Redux)</p>
+  - **/pages:** <p>Templates for individual pages (DetailPage, FavoritesPage, SearchPage)</p>
+  - **/slices:** <p>Contains folders with individual slices used in the application (Redux)</p>
 
-## 📝 Table of Contents
+## Important Files Description
+<p>For detailed information about the functions of the code and its scripts, refer to the code comments.</p>
 
-- [About](#about)
-- [Demo / Working](#demo)
-- [How it works](#working)
-- [Usage](#usage)
-- [Getting Started](#getting_started)
-- [Deploying your own bot](#deployment)
-- [Built Using](#built_using)
-- [TODO](../TODO.md)
-- [Contributing](../CONTRIBUTING.md)
-- [Authors](#authors)
-- [Acknowledgments](#acknowledgement)
+### `/src`
+- **`index.tsx`:** <p>The main TypeScript file, serving as the entry point to the application. It initializes and renders the root component.</p>
+- **`App.tsx`:** <p>The root component of the application. It defines routing to other subpages using `react-router`.</p>
+- **`store.ts`:** <p>Configures the Redux store, representing the entire storage, into which reducers from individual slices are inserted.</p>
 
-## 🧐 About <a name = "about"></a>
+### `/src/api`
+- **`actions.ts`:** <p>Contains Redux Thunk actions for asynchronous API calls, these actions are then called on slices where needed. These actions serve to fetch data from the source based on input parameters.</p>
+- **`functions.ts`:** <p>Contains primitive functions.</p>
+- **`interfaces.ts`:** <p>Contains all custom interfaces used on the site.</p>
 
-Write about 1-2 paragraphs describing the purpose of your bot.
+### `/src/components`
+- **Buttons:** <p>Contains buttons used on the pages.</p>
+- **Header:** <p>Layout for the header.</p>
+- **Loading:** <p>Layout for the component that appears while data is loading.</p>
+- **MoviesList:** <p>Contains components for displaying searched movies and details in the listing.</p>
+- **Nav:** <p>Layout for navigation.</p>
+- **Pagination:** <p>Component for pagination that appears if there are more search results.</p>
+- **Search:** <p>Component for searching based on text.</p>
+- **Title:** <p>Component for h1-h3 elements with custom classes and the option to add more.</p>
 
-## 🎥 Demo / Working <a name = "demo"></a>
+### `/src/hooks`
+- **`storeHook.ts`:** <p>Types hooks according to TypeScript.</p>
 
-![Working](https://media.giphy.com/media/20NLMBm0BkUOwNljwv/giphy.gif)
+### `/src/pages`
+- <p>Layouts for subpages.</p>
 
-## 💭 How it works <a name = "working"></a>
-
-The bot first extracts the word from the comment and then fetches word definitions, part of speech, example and source from the Oxford Dictionary API.
-
-If the word does not exist in the Oxford Dictionary, the Oxford API then returns a 404 response upon which the bot then tries to fetch results form the Urban Dictionary API.
-
-The bot uses the Pushshift API to fetch comments, PRAW module to reply to comments and Heroku as a server.
-
-The entire bot is written in Python 3.6
-
-## 🎈 Usage <a name = "usage"></a>
-
-To use the bot, type:
-
-```
-!dict word
-```
-
-The first part, i.e. "!dict" **is not** case sensitive.
-
-The bot will then give you the Oxford Dictionary (or Urban Dictionary; if the word does not exist in the Oxford Dictionary) definition of the word as a comment reply.
-
-### Example:
-
-> !dict what is love
-
-**Definition:**
-
-Baby, dont hurt me~
-Dont hurt me~ no more.
-
-**Example:**
-
-Dude1: Bruh, what is love?
-Dude2: Baby, dont hurt me, dont hurt me- no more!
-Dude1: dafuq?
-
-**Source:** https://www.urbandictionary.com/define.php?term=what%20is%20love
-
----
-
-<sup>Beep boop. I am a bot. If there are any issues, contact my [Master](https://www.reddit.com/message/compose/?to=PositivePlayer1&subject=/u/Wordbook_Bot)</sup>
-
-<sup>Want to make a similar reddit bot? Check out: [GitHub](https://github.com/kylelobo/Reddit-Bot)</sup>
-
-## 🏁 Getting Started <a name = "getting_started"></a>
-
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See [deployment](#deployment) for notes on how to deploy the project on a live system.
-
-### Prerequisites
-
-What things you need to install the software and how to install them.
-
-```
-Give examples
-```
-
-### Installing
-
-A step by step series of examples that tell you how to get a development env running.
-
-Say what the step will be
-
-```
-Give the example
-```
-
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo.
-
-## 🚀 Deploying your own bot <a name = "deployment"></a>
-
-To see an example project on how to deploy your bot, please see my own configuration:
-
-- **Heroku**: https://github.com/kylelobo/Reddit-Bot#deploying_the_bot
-
-## ⛏️ Built Using <a name = "built_using"></a>
-
-- [PRAW](https://praw.readthedocs.io/en/latest/) - Python Reddit API Wrapper
-- [Heroku](https://www.heroku.com/) - SaaS hosting platform
-
-## ✍️ Authors <a name = "authors"></a>
-
-- [@kylelobo](https://github.com/kylelobo) - Idea & Initial work
-
-See also the list of [contributors](https://github.com/kylelobo/The-Documentation-Compendium/contributors) who participated in this project.
-
-## 🎉 Acknowledgements <a name = "acknowledgement"></a>
-
-- Hat tip to anyone whose code was used
-- Inspiration
-- References
+### `/src/slices`
+- **`favoritesSlice`:** <p>A slice for managing favorite movies.</p>
+- **`isInitialLoadSlice`:** <p>A slice that checks if it's the first page load, necessary for error messages.</p>
+- **`movieDetailSlice`:** <p>A slice for movie details.</p>
+- **`pagesSlice`:** <p>A slice for managing pagination.</p>
+- **`searchStringSlice`:** <p>A
