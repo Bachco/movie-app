@@ -81,3 +81,5 @@
 - **Use README.md to describe the project and its scripts:** <p>Fulfilled.</p>
 - **Use any state/data management (redux, mobx, jotai, context API, etc.):** <p>Redux used.</p>
 - **Properly handle side effects and async calls (redux-saga, thunk, react-query, etc.):** <p>Fulfilled.</p>
+
+If you need more information, please contact me at [jozefbachorik@gmail.com](mailto:jozefbachorik@gmail.com).
