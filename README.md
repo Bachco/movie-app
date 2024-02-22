@@ -65,4 +65,19 @@
 - **`isInitialLoadSlice`:** <p>A slice that checks if it's the first page load, necessary for error messages.</p>
 - **`movieDetailSlice`:** <p>A slice for movie details.</p>
 - **`pagesSlice`:** <p>A slice for managing pagination.</p>
-- **`searchStringSlice`:** <p>A
+- **`searchStringSlice`:** <p>A slice for managing the search term to keep it in history and after returning to the search page.</p>
+- **`themeSlice`:** <p>A feature slice for managing the site's dark theme, also stored in local storage.</p>
+
+## Configuration Files
+- **`tailwind.config.js`:** <p>Configuration file for the Tailwind module.</p>
+
+## Fulfillment of Requirements
+<p>Here is how the project meets the specified requirements:</p>
+
+- **Use OMDb API to fetch all necessary data:** <p>Fulfilled - managed by actions in `actions.ts`.</p>
+- **Use up-to-date features of Ecmascript 6 or TypeScript:** <p>Fulfilled.</p>
+- **Choose an open-source component library, such as Material UI, Ant Design, etc.:** <p>Fulfilled - Tailwind used.</p>
+- **Use react-router for page navigation:** <p>Fulfilled - used in `App.tsx`.</p>
+- **Use README.md to describe the project and its scripts:** <p>Fulfilled.</p>
+- **Use any state/data management (redux, mobx, jotai, context API, etc.):** <p>Redux used.</p>
+- **Properly handle side effects and async calls (redux-saga, thunk, react-query, etc.):** <p>Fulfilled.</p>
