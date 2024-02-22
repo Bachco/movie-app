@@ -3,7 +3,7 @@ import { useAppSelector } from "../../hooks/storeHook";
 import { Props } from "../../api/interfaces";
 
 
-
+/** Template for layout, wrap children to basic css class from tailwind */
 const Layout = ({ children }: Props) => {
     const { darkTheme } = useAppSelector((state) => state)
     return (

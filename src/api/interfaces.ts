@@ -1,5 +1,7 @@
 import { ReactNode } from "react";
 
+/** all custom interfaces used by this app */
+
 export interface WritingItem {
     Title: string;
     imdbID: string;
