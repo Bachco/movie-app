@@ -2,6 +2,8 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { getMoviesByString } from '../../api/actions';
 import { MoviesState } from '../../api/interfaces';
 
+// Defining the initial state of the slice, conforming to the MoviesState interface.
+// This state includes flags for loading and error states, and a data field for storing the movies data.
 const initialState: MoviesState = {
     loading: false,
     error: null,
@@ -17,17 +19,22 @@ const moviesSlice = createSlice({
         },
     },
     extraReducers(builder) {
-        builder.addCase(getMoviesByString.pending, (state) => {
-            state.loading = true;
-        });
-        builder.addCase(getMoviesByString.fulfilled, (state, action: PayloadAction<{ Search: any[], totalResults: any, Error: any }>) => {
-            state.loading = false;
-            state.data = action.payload;
-        });
-        builder.addCase(getMoviesByString.rejected, (state, action: PayloadAction<any>) => {
-            state.loading = false;
-            state.error = action.payload;
-        });
+        // Handling the asynchronous getMoviesByString thunk action.
+        builder
+            // Handling the pending state of the getMoviesByString action.
+            .addCase(getMoviesByString.pending, (state) => {
+                state.loading = true;
+            })
+            // Handling the fulfilled state when getMoviesByString successfully fetches data.
+            .addCase(getMoviesByString.fulfilled, (state, action: PayloadAction<{ Search: any[], totalResults: any, Error: any }>) => {
+                state.loading = false;
+                state.data = action.payload;
+            })
+            // Handling the rejected state when getMoviesByString fails to fetch data.
+            .addCase(getMoviesByString.rejected, (state, action: PayloadAction<any>) => {
+                state.loading = false;
+                state.error = action.payload;
+            });
     }
 })
 

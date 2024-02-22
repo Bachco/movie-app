@@ -24,7 +24,7 @@ const DetailPage = () => {
         (!movieDetail.loading) ? (!movieDetail.error && movieDetail.data && !findValueByKey(movieDetail.data, "Search")) && (<div className="container mx-auto flex flex-col xl:flex-row gap-x-12">
           <div className="flex flex-col w-full xl:max-w-[480px] relative">
             {(movie.Poster && movie.Poster !== "N/A") ? (
-              <img src={movie.Poster} alt={movie.Title} />
+              <div className="relative after:absolute after:top-0 after:bottom-0 after:right-0 after:left-0 after:bg-black/30"><img src={movie.Poster} alt={movie.Title} className="w-full"/></div>
             ) : (
               <div className="flex w-full min-h-80 justify-center items-center bg-gray-800 text-white">
                 No image

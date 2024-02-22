@@ -1,8 +1,11 @@
 import { Link } from "react-router-dom";
 import { useAppSelector } from "../../hooks/storeHook";
 
+
 const Nav = () => {
-  const { data } = useAppSelector((state) => state.movieDetail);
+  const { data } = useAppSelector((state) => state.movieDetail); // Destructuring to extract movieDetail data from the Redux store
+
+  /** Template for nav */
   return (
     <ul className="flex gap-x-8 justify-center">
       <li>

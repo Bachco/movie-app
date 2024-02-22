@@ -19,7 +19,7 @@ const FavoritesPage = () => {
           <div className="flex flex-col">
             <div className="my-2 overflow-x-auto sm:-max-6 lg:-mx-8">
               <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-                <div className="shadow overflow-hidden border-gray-200 m-4 sm:rounded-lg">
+                <div className="shadow overflow-hidden border-gray-200 m-4">
                   <table className="w-full divide-y divide-gray-200 mx-auto">
                     <thead className="bg-gray-50 dark:bg-gray-700 text-gray-500 dark:text-gray-50">
                       <tr>
@@ -43,7 +43,15 @@ const FavoritesPage = () => {
 
                     <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200">
                       {favoritesData?.favorites.map(item => <tr key={item.imdbID}>
-                        <td className="px-6 py-4 whitespace-nowrap">{item.Poster && <img className="h-10 w-10 rounded-full" src={item.Poster} alt={item.Title} />}</td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          {(item.Poster && item.Poster !== "N/A") ? (
+                            <img className="h-10 w-10 rounded-full" src={item.Poster} alt={item.Title} />
+                          ) : (
+                            <div className="flex h-10 w-10 rounded-full justify-center items-center bg-gray-900 text-white">
+                              
+                            </div>
+                          )}
+                        </td>
                         <td className="px-6 py-4 whitespace-nowrap"><div className="text-sm font-medium text-gray-900 dark:text-gray-400"><Link to="/detail" onClick={() => dispatch(getMoviesById({ searchId: item.imdbID }))}>{item.Title}</Link></div></td>
                         <td className="px-6 py-4 whitespace-nowrap">{item.Type}</td>
                         <td className="px-6 py-4 whitespace-nowrap">{item.Year}</td>

@@ -6,24 +6,33 @@ import { SearchBoxProps } from "../../api/interfaces";
 
 const Search: FC<SearchBoxProps> = ({ onSearch }) => {
     const dispatch = useAppDispatch();
-    const searchString = useAppSelector((state) => state.searchString);
-    const [inputValue, setInputValue] = useState(searchString);
+    const searchString = useAppSelector((state) => state.searchString);  // Selecting the searchString state from the Redux store.
+     // Local state for managing the input value, initialized with the current search string from the Redux store.
+     const [inputValue, setInputValue] = useState(searchString);
 
+    // Function to handle form submission.
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
+        e.preventDefault(); // Preventing default form submission behavior.
         if (inputValue.trim().toLowerCase() === "") {
+            // If the input value is empty, dispatch the clearAll action to reset the movies data.
             dispatch(clearAll());
         } else {
+            // Otherwise, dispatch setSearchString with the trimmed and lowercase input value,
+            // and call the onSearch prop function with the same value.
             dispatch(setSearchString(inputValue.trim().toLowerCase()));
             onSearch(inputValue.trim().toLowerCase());
         }
     };
 
+    // Function to handle input value changes.
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        // Filtering the input value to remove non-alphanumeric characters.
         const filteredValue = e.target.value.replace(/[^a-zA-Z0-9 ]/g, '');
+        // Updating the local state with the filtered input value.
         setInputValue(filteredValue);
     };
 
+    /** Template */
     return (
         <form onSubmit={handleSubmit}>
             <div className="flex gap-0">

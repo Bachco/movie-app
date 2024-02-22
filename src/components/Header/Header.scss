@@ -5,7 +5,7 @@
 @layer components {
   .Header {
     &__icon {
-      @apply hover:opacity-15 cursor-pointer;
+      @apply cursor-pointer hover:text-blue-500 transition-colors duration-200;
     }
   }
 }

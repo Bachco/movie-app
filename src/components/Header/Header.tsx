@@ -5,10 +5,11 @@ import { toggleTheme } from '../../slices/themeSlice/themeSlice';
 import Nav from '../Nav/Nav';
 
 const Header = () => {
-    const { darkTheme } = useAppSelector(state => state);
-    const dispatch = useAppDispatch();
-    const onToggle = () => dispatch(toggleTheme());
+    const { darkTheme } = useAppSelector(state => state); // Accessing the darkTheme value from the Redux store
+    const dispatch = useAppDispatch(); // Hook to dispatch actions
+    const onToggle = () => dispatch(toggleTheme()); // Handler function to toggle the theme
 
+    /** Template */
     return (
         <div className='Header mb-20'>
             <nav className='border-b border-gray-200 border-opacity-25 py-4'>
@@ -20,7 +21,7 @@ const Header = () => {
                     </a>
                     <Nav />
                     <div className='flex items-center lg:order-2 justify-end sm:static absolute top-3 right-0'>
-                        {darkTheme ? <BsSun onClick={() => onToggle()} className='Header__icon' /> : <BsFillMoonFill onClick={() => onToggle()} className='Header__icon' />}
+                        {darkTheme ? <BsFillMoonFill onClick={() => onToggle()} className='Header__icon' /> : <BsSun onClick={() => onToggle()} className='Header__icon' />}
                     </div>
                 </div>
             </nav>
